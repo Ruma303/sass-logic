@@ -1,0 +1,127 @@
+.div-container {
+   display: flex;
+   flex-direction: row;
+   gap: 1rem;
+   margin: 2rem 1rem;
+}
+
+.square {
+   width: 100px;
+   height: 100px;
+   border: 1px solid black;
+}
+
+$color1: red;
+$color2: green;
+$color3: blue;
+
+#div1 {
+   @extend .square;
+   background-color: mix($color1, $color2, 20%);
+}
+
+#div2 {
+   @extend .square;
+   background-color: adjust-hue($color3, $degrees: 180);
+}
+
+#div3 {
+   @extend .square;
+   background-color: rgba($color1, $alpha: .8);
+   width: percentage($number: .02);
+}
+
+//% Funzioni personalizzate
+/*
+@function calculate-rem($size) {
+   $rem-size: $size / 16px;
+   @return $rem-size * 1rem;
+}
+
+p {
+   font-size: calculate-rem(24px); // 1.5rem
+} */
+
+//% Conditional directives
+/*
+@if $color3 {
+   .title {
+      color: $color3;
+   }
+}
+
+@else if $color2 {
+   .title {
+      color: $color2;
+   }
+}
+
+@else {
+   .title {
+      color: $color1;
+   }
+}
+ */
+
+
+//% Loops
+
+//$ Sintassi @for
+
+/*
+@for $variabile from inizio to fine {
+   // Blocco di codice SASS
+}
+//? Oppure
+@for $variabile from inizio through fine {
+   // Blocco di codice SASS
+}
+*/
+
+//$ @for
+
+@for $i from 1 through 3 {
+   .box-#{$i} {
+      width: 100px * $i;
+   }
+}
+
+@for $i from 1 to 3 {
+   .box-#{$i} {
+      width: 100px * $i;
+   }
+}
+
+
+//$ @each
+
+$colors: "red", "green", "blue";
+
+@each $color in $colors {
+   .text-#{$color} {
+      color: unquote($color);
+   }
+}
+
+//$ Iterare su una mappa
+$color-map: (
+   primary: red,
+   secondary: blue,
+   accent: green
+);
+
+@each $key,
+$value in $color-map {
+   .text-#{$key} {
+      color: $value;
+   }
+}
+
+//$ @while
+$size: 8;
+@while $size > 0 {
+   .text-size-#{$size} {
+      font-size: #{$size}px;
+   }
+   $size: $size - 1;
+}
