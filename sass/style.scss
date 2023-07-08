@@ -17,7 +17,8 @@ $color3: blue;
 
 #div1 {
    @extend .square;
-   background-color: mix($color1, $color2, 20%);
+   background-color: mix($color1, $color2, 100%);
+   /* background-color: rgba($color1, 50%); */
 }
 
 #div2 {
@@ -28,29 +29,29 @@ $color3: blue;
 #div3 {
    @extend .square;
    background-color: rgba($color1, $alpha: .8);
-   width: percentage($number: .02);
+   width: abs(-20%);
 }
 
 //% Funzioni personalizzate
-/*
-@function calculate-rem($size) {
+
+/* @function calculate-rem($size) {
    $rem-size: $size / 16px;
    @return $rem-size * 1rem;
 }
 
 p {
-   font-size: calculate-rem(24px); // 1.5rem
+   font-size: calculate-rem(32px); // 1.5rem
 } */
 
 //% Conditional directives
-/*
-@if $color3 {
+
+/* @if ( $color === '' ) {
    .title {
       color: $color3;
    }
 }
 
-@else if $color2 {
+@else if ( 4 != 4 ) {
    .title {
       color: $color2;
    }
@@ -87,9 +88,9 @@ p {
 }
 
 @for $i from 1 to 3 {
-   .box-#{$i} {
-      width: 100px * $i;
-   }
+    .box-#{$i} {
+        width: 100px * $i;
+    }
 }
 
 
@@ -98,9 +99,9 @@ p {
 $colors: "red", "green", "blue";
 
 @each $color in $colors {
-   .text-#{$color} {
-      color: unquote($color);
-   }
+    .text-#{$color} {
+        color: unquote($color);
+    }
 }
 
 //$ Iterare su una mappa
@@ -110,18 +111,17 @@ $color-map: (
    accent: green
 );
 
-@each $key,
-$value in $color-map {
-   .text-#{$key} {
-      color: $value;
-   }
+@each $key, $value in $color-map {
+    .button-#{$key} {
+        color: $value;
+    }
 }
 
 //$ @while
-$size: 8;
-@while $size > 0 {
-   .text-size-#{$size} {
-      font-size: #{$size}px;
-   }
-   $size: $size - 1;
+$size: 1;
+@while $size < 8 {
+    .text-size-#{$size} {
+        font-size: #{$size * 3}px;
+    }
+   $size: $size + 1;
 }
